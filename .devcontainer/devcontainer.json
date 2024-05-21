@@ -13,7 +13,8 @@
 			"extensions": [
 				"BazelBuild.vscode-bazel",
 				"ms-vscode.cpptools",
-				"mhutchie.git-graph"
+				"mhutchie.git-graph",
+				"streetsidesoftware.code-spell-checker"
 			]
 		}
 	}
