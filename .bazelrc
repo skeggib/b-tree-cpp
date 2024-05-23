@@ -1,1 +1,3 @@
 build --action_env=BAZEL_CXXOPTS="-std=c++23"
+build --compilation_mode=dbg
+test --test_output=errors
