@@ -69,7 +69,7 @@ TEST_CASE("inserting a smaller key than the one already in the b-tree node") {
   }
 }
 
-TEST_CASE("inserting an already existing key in a b-tree node") {
+TEST_CASE("inserting an already existing key into an non-full b-tree node") {
   btree_node root;
 
   int key = 2;
@@ -82,4 +82,21 @@ TEST_CASE("inserting an already existing key in a b-tree node") {
   SECTION("replaces the existing value") { REQUIRE(root.values[0] == new_value); }
 
   SECTION("does not increase its size") { REQUIRE(root.size == 1); }
+}
+
+TEST_CASE("inserting an already existing key into a full b-tree node") {
+  btree_node root;
+
+  insert(root, 1, "other_value");
+
+  int key = 2;
+  std::string initial_value = "initial_value";
+  insert(root, key, initial_value);
+
+  std::string new_value = "new_value";
+  insert(root, key, new_value);
+
+  SECTION("replaces the existing value") { REQUIRE(root.values[1] == new_value); }
+
+  SECTION("does not change its size") { REQUIRE(root.size == 2); }
 }
