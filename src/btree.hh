@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cassert>
+#include <functional>
 #include <memory>
 #include <optional>
 #include <sstream>
@@ -36,6 +37,11 @@ public:
     to_string(root, ss, 0);
     return ss.str();
   }
+
+  /**
+   * @brief Traverse the B-Tree in ascending order
+   */
+  void traverse(std::function<void(size_t depth, int key, std::string value)> callback) { traverse(root, 0, callback); }
 
 private:
   /**
@@ -114,6 +120,19 @@ private:
 
     if (node.children[node.size] != nullptr) {
       to_string(*node.children[node.size], ss, indent + 1);
+    }
+  }
+
+  static void traverse(const node &node, size_t depth,
+                       std::function<void(size_t depth, int key, std::string value)> callback) {
+    for (size_t i = 0; i < node.size; ++i) {
+      if (node.children[i] != nullptr) {
+        traverse(*node.children[i], depth + 1, callback);
+      }
+      callback(depth, node.keys[i], node.values[i]);
+    }
+    if (node.children[node.size] != nullptr) {
+      traverse(*node.children[node.size], depth + 1, callback);
     }
   }
 };
