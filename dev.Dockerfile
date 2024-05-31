@@ -10,3 +10,5 @@ run apt install -y golang
 run echo "export PATH=\$PATH:\$HOME/go/bin" >> $HOME/.bashrc
 
 run go install github.com/bazelbuild/buildtools/buildifier@latest
+
+run apt install -y clang-format

@@ -16,9 +16,7 @@ public:
     check_b_tree_properties();
   }
 
-  std::optional<const std::string *> get(int key) {
-    return b.get(key);
-  }
+  std::optional<const std::string *> get(int key) { return b.get(key); }
 
   std::string to_string() const { return b.to_string(); }
 
